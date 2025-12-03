@@ -54,24 +54,38 @@
                 <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">I. Basic Transaction Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     
-                    <!-- More than one Buyer Field -->
-                    <div class="input-group">
+                    <!-- 1. More than one Buyer Field -->
+                    <div class="input-group col-span-full">
                         <label class="block mb-2">Whether more than one Buyer as per Agreement<span class="required-asterisk">*</span></label>
                         <div class="flex space-x-6 mt-1">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="Yes" required
+                                <input type="radio" name="multipleBuyers" value="Yes" required onchange="toggleSecondBuyer(this.value)"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">Yes</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="No" required
+                                <input type="radio" name="multipleBuyers" value="No" required onchange="toggleSecondBuyer(this.value)"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">No</span>
                             </label>
                         </div>
                     </div>
+
+                    <!-- 2. Conditional Fields for Second Buyer (Initially Hidden) -->
+                    <div id="secondBuyerFields" class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-full hidden border-t border-gray-300 pt-4 mt-4">
+                        <div class="input-group">
+                            <label for="buyer2Pan">PAN of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer2Pan" name="buyer2Pan" maxlength="10" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyer2Name">Name of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer2Name" name="buyer2Name" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
                     
-                    <!-- Last Installment Field (NEW) -->
+                    <!-- 3. Last Installment Field -->
                     <div class="input-group">
                         <label class="block mb-2">Whether it is last installment?<span class="required-asterisk">*</span></label>
                         <div class="flex space-x-6 mt-1">
@@ -88,14 +102,21 @@
                         </div>
                     </div>
                     
+                    <!-- 4. Payment Type (Now Radio Buttons) -->
                     <div class="input-group">
-                        <label for="transactionType">Payment Type<span class="required-asterisk">*</span></label>
-                        <select id="transactionType" name="transactionType" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Select Option</option>
-                            <option value="lumpSum">Lump Sum Payment</option>
-                            <option value="installment">Installment Payment</option>
-                        </select>
+                        <label class="block mb-2">Payment Type<span class="required-asterisk">*</span></label>
+                        <div class="flex space-x-6 mt-1">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="transactionType" value="lumpSum" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">Lump Sum</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="transactionType" value="installment" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">Installment</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -438,6 +459,29 @@
     </div>
 
     <script>
+        const secondBuyerPanInput = document.getElementById('buyer2Pan');
+        const secondBuyerNameInput = document.getElementById('buyer2Name');
+        const secondBuyerFieldsDiv = document.getElementById('secondBuyerFields');
+
+        // Function to toggle the second buyer fields based on radio button value
+        function toggleSecondBuyer(value) {
+            if (value === 'Yes') {
+                // Show fields and make them required
+                secondBuyerFieldsDiv.classList.remove('hidden');
+                secondBuyerPanInput.required = true;
+                secondBuyerNameInput.required = true;
+            } else {
+                // Hide fields and remove required attribute
+                secondBuyerFieldsDiv.classList.add('hidden');
+                secondBuyerPanInput.required = false;
+                secondBuyerNameInput.required = false;
+                
+                // Clear values when hidden (important for data submission)
+                secondBuyerPanInput.value = '';
+                secondBuyerNameInput.value = '';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('form26qb');
             const amountPaidInput = document.getElementById('amountPaid');
@@ -449,6 +493,16 @@
             const FORMSPREE_URL = 'https://formspree.io/f/xyzrjoea'; 
             const TARGET_EMAIL = 'arjusmailbox@gmail.com';
             // -------------------------------
+
+            // Ensure initial state is correctly set (hidden)
+            const initialBuyerStatus = document.querySelector('input[name="multipleBuyers"]:checked');
+            if (initialBuyerStatus) {
+                toggleSecondBuyer(initialBuyerStatus.value);
+            } else {
+                // Default to hidden if no radio button is checked initially
+                secondBuyerFieldsDiv.classList.add('hidden');
+            }
+
 
             // Function to calculate TDS automatically
             const calculateTDS = () => {
@@ -479,11 +533,20 @@
                 // 1. Client-Side Validation
                 const buyerPan = document.getElementById('buyerPan').value;
                 const sellerPan = document.getElementById('sellerPan').value;
+                const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
 
                 if (!validatePan(buyerPan)) {
                     showModal("Validation Error", "Please enter a valid 10-digit PAN for the Buyer (e.g., ABCDE1234F).");
                     return;
                 }
+                
+                if (multipleBuyersSelected === 'Yes') {
+                    if (!validatePan(secondBuyerPanInput.value)) {
+                        showModal("Validation Error", "Please enter a valid 10-digit PAN for the 2nd Applicant.");
+                        return;
+                    }
+                }
+                
                 if (!validatePan(sellerPan)) {
                     showModal("Validation Error", "Please enter a valid 10-digit PAN for the Seller (e.g., ABCDE1234F).");
                     return;
@@ -544,5 +607,4 @@
         });
     </script>
 </body>
-
 </html>
