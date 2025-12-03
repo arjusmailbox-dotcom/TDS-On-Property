@@ -156,34 +156,28 @@
                         </div>
                     </div>
 
-                    <!-- Percentage of Ownership 1st Applicant -->
+                    <!-- 1ST APPLICANT CONTACT & OWNERSHIP (New Row Order) -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                         <div class="input-group md:col-span-1">
-                            <label for="buyer1Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
-                            <input type="number" id="buyer1Ownership" name="buyer1Ownership" min="1" max="100" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
-                        </div>
-                        <div class="md:col-span-2"></div>
-                    </div>
-                    <!-- END: Percentage of Ownership 1st Applicant -->
-
-                    <!-- 1ST APPLICANT CONTACT -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <div class="input-group">
                             <label for="buyer1Email">Email ID<span class="required-asterisk">*</span></label>
                             <input type="email" id="buyer1Email" name="buyer1Email" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., name@example.com">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group md:col-span-1">
                             <label for="buyer1Mobile">Mobile Number<span class="required-asterisk">*</span></label>
                             <input type="tel" id="buyer1Mobile" name="buyer1Mobile" maxlength="10" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 9895012345">
+                        </div>
+                        <div id="buyer1OwnershipRow" class="input-group md:col-span-1">
+                            <label for="buyer1Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
+                            <input type="number" id="buyer1Ownership" name="buyer1Ownership" min="1" max="100" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
                         </div>
                     </div>
                     
                     <!-- 1ST APPLICANT ADDRESS Sub-Fields -->
                     <div class="space-y-4 mt-6">
-                        <h3 class="text-md font-semibold text-gray-700">Communication Address (Applicant 1)</h3>
+                        <h3 id="buyer1AddressHeading" class="text-md font-semibold text-gray-700">Communication Address of the Buyer</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="input-group">
                                 <label for="buyer1Country">Country<span class="required-asterisk">*</span></label>
@@ -271,28 +265,22 @@
                         </div>
                     </div>
 
-                    <!-- Percentage of Ownership 2nd Applicant -->
+                    <!-- 2ND APPLICANT CONTACT & OWNERSHIP (New Row Order) -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="input-group md:col-span-1">
+                            <label for="buyer2Email">Email ID<span class="required-asterisk">*</span></label>
+                            <input type="email" id="buyer2Email" name="buyer2Email"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., name@example.com">
+                        </div>
+                        <div class="input-group md:col-span-1">
+                            <label for="buyer2Mobile">Mobile Number<span class="required-asterisk">*</span></label>
+                            <input type="tel" id="buyer2Mobile" name="buyer2Mobile" maxlength="10"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 9895012345">
+                        </div>
                         <div class="input-group md:col-span-1">
                             <label for="buyer2Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
                             <input type="number" id="buyer2Ownership" name="buyer2Ownership" min="1" max="100" 
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
-                        </div>
-                        <div class="md:col-span-2"></div>
-                    </div>
-                    <!-- END: Percentage of Ownership 2nd Applicant -->
-
-                    <!-- 2ND APPLICANT CONTACT -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <div class="input-group">
-                            <label for="buyer2Email">Email ID<span class="required-asterisk">*</span></label>
-                            <input type="email" id="buyer2Email" name="buyer2Email"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="buyer2Mobile">Mobile Number<span class="required-asterisk">*</span></label>
-                            <input type="tel" id="buyer2Mobile" name="buyer2Mobile" maxlength="10"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
                     </div>
 
@@ -601,9 +589,11 @@
     <script>
         // References for 1st Applicant
         const applicant1Heading = document.getElementById('applicant1Heading');
+        const buyer1AddressHeading = document.getElementById('buyer1AddressHeading'); // New Ref
         const buyer1PanLabel = document.getElementById('buyer1PanLabel');
         const buyer1NameLabel = document.getElementById('buyer1NameLabel');
         const buyer1OwnershipInput = document.getElementById('buyer1Ownership');
+        const buyer1OwnershipRow = document.getElementById('buyer1OwnershipRow'); // Reference to the row/container
         const buyer1StatusInput = document.getElementById('buyer1Status');
         const buyer1EmailInput = document.getElementById('buyer1Email');
         const buyer1MobileInput = document.getElementById('buyer1Mobile');
@@ -663,34 +653,43 @@
             const panAsterisk = '<span class="required-asterisk">*</span>';
             const nameAsterisk = '<span class="required-asterisk">*</span>';
             
-            // Applicant 1 fields (Ownership) are always required
-            buyer1OwnershipInput.required = true;
-
             if (value === 'Yes') {
-                // RENAME 1ST APPLICANT FIELDS AND SHOW HEADING
+                // --- MULTIPLE BUYERS: YES ---
+                
+                // 1. Rename 1st Applicant fields and show heading
                 applicant1Heading.textContent = '1st Applicant Details';
-                // Set color class explicitly if needed, although it's set in HTML now
-                // applicant1Heading.classList.add('text-indigo-700'); 
                 buyer1PanLabel.innerHTML = `${originalPanText} (1st Applicant)${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText} (1st Applicant)${nameAsterisk}`;
                 
-                // SHOW 2ND APPLICANT FIELDS
-                applicant2DetailsDiv.classList.remove('hidden');
+                // 2. Show 1st Applicant Ownership field and keep required
+                buyer1OwnershipRow.classList.remove('hidden');
+                buyer1OwnershipInput.required = true;
                 
-                // Set required status for 2nd Applicant fields
+                // 3. Rename 1st Applicant Address Heading
+                buyer1AddressHeading.textContent = 'Communication Address (Applicant 1)';
+
+                // 4. Show 2nd Applicant fields and set required
+                applicant2DetailsDiv.classList.remove('hidden');
                 setApplicant2Required(true);
 
             } else {
-                // RESTORE ORIGINAL FIELD NAMES
+                // --- MULTIPLE BUYERS: NO ---
+                
+                // 1. Restore original field names
                 applicant1Heading.textContent = 'Buyer Details';
-                // applicant1Heading.classList.remove('text-indigo-700'); 
                 buyer1PanLabel.innerHTML = `${originalPanText}${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText}${nameAsterisk}`;
-
-                // HIDE 2ND APPLICANT FIELDS
-                applicant2DetailsDiv.classList.add('hidden');
                 
-                // Remove required status and clear values for 2nd Applicant
+                // 2. HIDE 1st Applicant Ownership field, remove required, and clear value
+                buyer1OwnershipRow.classList.add('hidden');
+                buyer1OwnershipInput.required = false;
+                buyer1OwnershipInput.value = '';
+                
+                // 3. Restore 1st Applicant Address Heading
+                buyer1AddressHeading.textContent = 'Communication Address of the Buyer';
+
+                // 4. Hide 2nd Applicant fields and clear values
+                applicant2DetailsDiv.classList.add('hidden');
                 setApplicant2Required(false);
                 clearApplicant2Fields();
             }
