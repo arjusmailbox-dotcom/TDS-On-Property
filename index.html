@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 26QB Data Collector (Internal Use Only)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray background */
+        }
+        .form-container {
+            max-width: 900px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .section-header {
+            background-color: #0d47a1; /* Deep Blue header */
+            color: white;
+        }
+        .input-group label {
+            font-weight: 600;
+            color: #333;
+        }
+        .required-asterisk {
+            color: #e53e3e; /* Red for mandatory fields */
+            margin-left: 4px;
+        }
+        /* Style to mimic government portal buttons */
+        .submit-btn {
+            background-color: #1e88e5; /* Government blue */
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="form-container mx-auto mt-4 rounded-lg">
+        <!-- Header Mimicking Gov Site -->
+        <header class="section-header p-4 rounded-t-lg rounded-b-lg">
+            <h1 class="2xl font-bold">Online Form for Furnishing Details Required for Filing TDS on Property</h1>
+            <p class="text-sm font-light mt-1">Tax Deducted at Source on Transfer of Immovable Property (Section 194-IA)</p>
+        </header>
+
+        <form id="form26qb" class="p-6 md:p-8 space-y-8">
+
+            <!-- Section 1: Transaction Details -->
+            <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">I. Type of Challan and Transaction</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- More than one Buyer Field -->
+                    <div class="input-group">
+                        <label class="block mb-2">Whether more than one Buyer as per Agreement<span class="required-asterisk">*</span></label>
+                        <div class="flex space-x-6 mt-1">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="multipleBuyers" value="Yes" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">Yes</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="multipleBuyers" value="No" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">No</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Last Installment Field (NEW) -->
+                    <div class="input-group">
+                        <label class="block mb-2">Whether it is last installment?<span class="required-asterisk">*</span></label>
+                        <div class="flex space-x-6 mt-1">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="isLastInstallment" value="Yes" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">Yes</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="isLastInstallment" value="No" required
+                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-gray-700">No</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="transactionType">Payment Type<span class="required-asterisk">*</span></label>
+                        <select id="transactionType" name="transactionType" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select Option</option>
+                            <option value="lumpSum">Lump Sum Payment</option>
+                            <option value="installment">Installment Payment</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Buyer (Deductor) Details -->
+            <div class="border border-gray-200 rounded-lg p-4">
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">II. Details of Buyer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="input-group">
+                        <label for="buyerStatus">Residential Status<span class="required-asterisk">*</span></label>
+                        <select id="buyerStatus" name="buyerStatus" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <option value="resident">Resident</option>
+                            <option value="nri">Non-Resident Indian (NRI)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="buyerPan">PAN of Buyer<span class="required-asterisk">*</span></label>
+                        <input type="text" id="buyerPan" name="buyerPan" maxlength="10" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                    </div>
+                    <div class="input-group">
+                        <label for="buyerName">Name of Buyer<span class="required-asterisk">*</span></label>
+                        <input type="text" id="buyerName" name="buyerName" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="input-group">
+                        <label for="buyerEmail">Email ID<span class="required-asterisk">*</span></label>
+                        <input type="email" id="buyerEmail" name="buyerEmail" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="input-group">
+                        <label for="buyerMobile">Mobile Number<span class="required-asterisk">*</span></label>
+                        <input type="tel" id="buyerMobile" name="buyerMobile" maxlength="10" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+                
+                <!-- START: Buyer Address Sub-Fields -->
+                <div class="space-y-4 mt-6">
+                    <h3 class="text-md font-semibold text-gray-700">Communication Address</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="buyerCountry">Country<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyerCountry" name="buyerCountry" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyerFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyerFlat" name="buyerFlatDoorBuilding" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="buyerRoad">Road / Street / Block / Sector</label>
+                            <input type="text" id="buyerRoad" name="buyerRoadStreetBlockSector"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyerPinCode">PIN Code<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyerPinCode" name="buyerPinCode" maxlength="6" pattern="\d{6}" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="buyerPostOffice">Post Office</label>
+                            <input type="text" id="buyerPostOffice" name="buyerPostOffice"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyerLocality">Area/Locality</label>
+                            <input type="text" id="buyerLocality" name="buyerAreaLocality"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="buyerDistrict">District</label>
+                            <input type="text" id="buyerDistrict" name="buyerDistrict"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyerState">State</label>
+                            <input type="text" id="buyerState" name="buyerState"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Buyer Address Sub-Fields -->
+            </div>
+
+            <!-- Section 3: Seller (Deductee) Details -->
+            <div class="border border-gray-200 rounded-lg p-4">
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">III. Details of Seller</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="input-group">
+                        <label for="sellerStatus">Residential Status<span class="required-asterisk">*</span></label>
+                        <select id="sellerStatus" name="sellerStatus" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <option value="resident">Resident</option>
+                            <option value="nri">Non-Resident Indian (NRI)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="sellerPan">PAN of Seller<span class="required-asterisk">*</span></label>
+                        <input type="text" id="sellerPan" name="sellerPan" maxlength="10" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                    </div>
+                    <div class="input-group">
+                        <label for="sellerName">Name of Seller<span class="required-asterisk">*</span></label>
+                        <input type="text" id="sellerName" name="sellerName" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="input-group">
+                        <label for="sellerEmail">Email ID<span class="required-asterisk">*</span></label>
+                        <input type="email" id="sellerEmail" name="sellerEmail" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="input-group">
+                        <label for="sellerMobile">Mobile Number<span class="required-asterisk">*</span></label>
+                        <input type="tel" id="sellerMobile" name="sellerMobile" maxlength="10" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <!-- START: Seller Address Sub-Fields -->
+                <div class="space-y-4 mt-6">
+                    <h3 class="text-md font-semibold text-gray-700">Communication Address</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="sellerCountry">Country<span class="required-asterisk">*</span></label>
+                            <input type="text" id="sellerCountry" name="sellerCountry" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="sellerFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                            <input type="text" id="sellerFlat" name="sellerFlatDoorBuilding" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="sellerRoad">Road / Street / Block / Sector</label>
+                            <input type="text" id="sellerRoad" name="sellerRoadStreetBlockSector"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="sellerPinCode">PIN Code<span class="required-asterisk">*</span></label>
+                            <input type="text" id="sellerPinCode" name="sellerPinCode" maxlength="6" pattern="\d{6}" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="sellerPostOffice">Post Office</label>
+                            <input type="text" id="sellerPostOffice" name="sellerPostOffice"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="sellerLocality">Area/Locality</label>
+                            <input type="text" id="sellerLocality" name="sellerAreaLocality"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="sellerDistrict">District</label>
+                            <input type="text" id="sellerDistrict" name="sellerDistrict"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="sellerState">State</label>
+                            <input type="text" id="sellerState" name="sellerState"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Seller Address Sub-Fields -->
+            </div>
+
+            <!-- Section 4: Property Transfer Details -->
+            <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">IV. Property Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="input-group">
+                        <label for="propertyType">Type of Property<span class="required-asterisk">*</span></label>
+                        <select id="propertyType" name="propertyType" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select Type</option>
+                            <option value="land">Land</option>
+                            <option value="building">Building</option>
+                            <option value="both">Land and Building</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="saleConsideration">Total Value of Consideration (Property Value) in ₹<span class="required-asterisk">*</span></label>
+                        <input type="number" id="saleConsideration" name="saleConsideration" min="5000000" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 6000000">
+                    </div>
+                </div>
+
+                <!-- START: Property Address Sub-Fields -->
+                <div class="space-y-4 mt-6">
+                    <h3 class="text-md font-semibold text-gray-700">Property Address</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="propertyCountry">Country<span class="required-asterisk">*</span></label>
+                            <input type="text" id="propertyCountry" name="propertyCountry" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="propertyFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                            <input type="text" id="propertyFlat" name="propertyFlatDoorBuilding" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="propertyRoad">Road / Street / Block / Sector</label>
+                            <input type="text" id="propertyRoad" name="propertyRoadStreetBlockSector"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="propertyPinCode">PIN Code<span class="required-asterisk">*</span></label>
+                            <input type="text" id="propertyPinCode" name="propertyPinCode" maxlength="6" pattern="\d{6}" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="propertyPostOffice">Post Office</label>
+                            <input type="text" id="propertyPostOffice" name="propertyPostOffice"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="propertyLocality">Area/Locality</label>
+                            <input type="text" id="propertyLocality" name="propertyAreaLocality"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label for="propertyDistrict">District</label>
+                            <input type="text" id="propertyDistrict" name="propertyDistrict"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="propertyState">State</label>
+                            <input type="text" id="propertyState" name="propertyState"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Property Address Sub-Fields -->
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="input-group">
+                        <label for="dateAgreement">Date of Agreement/Booking<span class="required-asterisk">*</span></label>
+                        <input type="date" id="dateAgreement" name="dateAgreement" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="input-group">
+                        <label for="datePayment">Date of Payment/Credit Made to Seller<span class="required-asterisk">*</span></label>
+                        <input type="date" id="datePayment" name="datePayment" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+                
+                <!-- Total amount paid/ credited in previous installments, if any -->
+                <div class="input-group mt-6">
+                    <label for="previousInstallments">Total amount paid/ credited in previous installments, if any</label>
+                    <input type="number" id="previousInstallments" name="previousInstallmentsTotal" value="0" min="0"
+                        class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-------------------------------------------------------------------------->
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="input-group">
+                        <label for="amountPaid">Amount Paid/Credited Currently<span class="required-asterisk">*</span></label>
+                        <input type="number" id="amountPaid" name="amountPaid" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Amount to deduct TDS on">
+                    </div>
+                    <div class="input-group">
+                        <label for="tdsRate">TDS Rate (%)<span class="required-asterisk">*</span></label>
+                        <input type="number" id="tdsRate" name="tdsRate" value="1.00" step="0.01" min="0.01" required disabled
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed">
+                    </div>
+                    <div class="input-group">
+                        <label for="tdsAmount">TDS Amount Deducted (1% of Amount Paid)<span class="required-asterisk">*</span></label>
+                        <input type="text" id="tdsAmount" name="tdsAmount" readonly
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-gray-200 cursor-not-allowed font-bold text-green-700">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Declaration -->
+            <div class="flex items-start mt-8">
+                <input type="checkbox" id="declaration" name="declaration" required
+                    class="h-4 w-4 text-blue-600 border-gray-300 rounded mt-1 focus:ring-blue-500">
+                <label for="declaration" class="ml-2 text-sm text-gray-700">I declare that the details furnished above are correct to the best of my knowledge.</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center pt-4">
+                <button type="submit" class="submit-btn text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-200">
+                    Submit Data
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Custom Success/Error Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6">
+            <h3 id="modalTitle" class="text-2xl font-bold mb-4 text-blue-700"></h3>
+            <div id="modalContent" class="text-gray-700 space-y-3 text-sm"></div>
+            <button onclick="document.getElementById('resultModal').classList.add('hidden')"
+                class="mt-6 w-full py-2 submit-btn text-white font-bold rounded-md">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('form26qb');
+            const amountPaidInput = document.getElementById('amountPaid');
+            const tdsAmountInput = document.getElementById('tdsAmount');
+            const tdsRate = 0.01; // 1%
+            
+            // --- Formspree Configuration ---
+            // Linking to the user-provided hash, configured to send to arjusmailbox@gmail.com
+            const FORMSPREE_URL = 'https://formspree.io/f/xyzrjoea'; 
+            const TARGET_EMAIL = 'arjusmailbox@gmail.com';
+            // -------------------------------
+
+            // Function to calculate TDS automatically
+            const calculateTDS = () => {
+                const amountPaid = parseFloat(amountPaidInput.value) || 0;
+                // TDS is 1% of the amount paid/credited
+                const tdsCalculated = amountPaid * tdsRate;
+                tdsAmountInput.value = tdsCalculated.toFixed(2);
+            };
+
+            amountPaidInput.addEventListener('input', calculateTDS);
+
+            const showModal = (title, contentHTML) => {
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalContent').innerHTML = contentHTML;
+                document.getElementById('resultModal').classList.remove('hidden');
+            };
+
+            // Enhanced validation for PAN format
+            const validatePan = (pan) => {
+                // Basic PAN validation: 5 letters, 4 numbers, 1 letter
+                const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                return panRegex.test(pan.toUpperCase());
+            }
+
+            const handleSubmit = async (event) => {
+                event.preventDefault();
+
+                // 1. Client-Side Validation
+                const buyerPan = document.getElementById('buyerPan').value;
+                const sellerPan = document.getElementById('sellerPan').value;
+
+                if (!validatePan(buyerPan)) {
+                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Buyer (e.g., ABCDE1234F).");
+                    return;
+                }
+                if (!validatePan(sellerPan)) {
+                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Seller (e.g., ABCDE1234F).");
+                    return;
+                }
+                
+                // 2. Data Collection
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    // Normalize PAN to uppercase
+                    if (key.includes('Pan')) {
+                        data[key] = value.toUpperCase();
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // Add calculated fields for clarity in the email body
+                data._subject = `New Form 26QB Data Submission from ${data.buyerName}`;
+                data.tdsAmount = tdsAmountInput.value;
+                data.tdsRate = tdsRate.toFixed(2);
+                data.RecipientEmail = TARGET_EMAIL; 
+
+                // 3. ACTUAL Data Submission via Formspree
+                
+                try {
+                    const response = await fetch(FORMSPREE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        const successContent = `
+                            <p class="text-green-600 font-semibold text-lg">Submission Successful!</p>
+                        `;
+                        showModal("Data Submitted", successContent);
+                        form.reset(); 
+                    } else {
+                        const errorData = await response.json();
+                        let errorMsg = errorData.error ? `Formspree Error: ${errorData.error}` : 'Unknown submission error.';
+                        console.error('Formspree Error Response:', errorData);
+                        showModal("Submission Error", `<p>Failed to submit data. Please check the following:</p><ul class="list-disc list-inside mt-2"><li>Is the Formspree hash correctly linked to <code>${TARGET_EMAIL}</code>?</li><li>${errorMsg}</li></ul><p class="mt-2">Please try again later.</p>`);
+                    }
+                } catch (error) {
+                    console.error('Network Error:', error);
+                    showModal("Network Error", "Could not connect to the submission service. Please check your internet connection.");
+                }
+            };
+
+            form.addEventListener('submit', handleSubmit);
+            
+            // Initial call to ensure TDS field is populated on load if necessary (e.g., if a browser autofills)
+            calculateTDS();
+        });
+    </script>
+</body>
+</html>
