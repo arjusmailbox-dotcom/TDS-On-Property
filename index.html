@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form 26QB Data Collector (Internal Use Only)</title>
+    <title>Form 26QB Data Collector</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -135,7 +135,7 @@
                         <div class="input-group">
                             <label id="buyer1NameLabel" for="buyer1Name">Name of Buyer<span class="required-asterisk">*</span></label>
                             <input type="text" id="buyer1Name" name="buyer1Name" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Buyer Name...">
                         </div>
                         
                         <!-- 2. PAN of Buyer (UPDATED ORDER) -->
@@ -161,14 +161,14 @@
                         <div class="input-group md:col-span-1">
                             <label for="buyer1Email">Email ID<span class="required-asterisk">*</span></label>
                             <input type="email" id="buyer1Email" name="buyer1Email" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., name@example.com">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="example@domain.com">
                         </div>
                         <div class="input-group md:col-span-1">
                             <label for="buyer1Mobile">Mobile Number<span class="required-asterisk">*</span></label>
                             <input type="tel" id="buyer1Mobile" name="buyer1Mobile" maxlength="10" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 9895012345">
                         </div>
-                        <div id="buyer1OwnershipRow" class="input-group md:col-span-1">
+                        <div id="buyer1OwnershipRow" class="input-group md:col-span-1 hidden">
                             <label for="buyer1Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
                             <input type="number" id="buyer1Ownership" name="buyer1Ownership" min="1" max="100" 
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
@@ -182,7 +182,7 @@
                             <div class="input-group">
                                 <label for="buyer1Country">Country<span class="required-asterisk">*</span></label>
                                 <input type="text" id="buyer1Country" name="buyer1Country" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
                             </div>
                             <div class="input-group">
                                 <label for="buyer1Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
@@ -200,7 +200,7 @@
                             <div class="input-group">
                                 <label for="buyer1PinCode">PIN Code<span class="required-asterisk">*</span></label>
                                 <input type="text" id="buyer1PinCode" name="buyer1PinCode" maxlength="6" pattern="\d{6}" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
                             </div>
                         </div>
 
@@ -223,10 +223,11 @@
                                 <input type="text" id="buyer1District" name="buyer1District"
                                     class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                             </div>
+                            <!-- State Textbox (UPDATED) -->
                             <div class="input-group">
-                                <label for="buyer1State">State</label>
-                                <input type="text" id="buyer1State" name="buyer1State"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <label for="buyer1State">State<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer1State" name="buyer1State" required
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: Kerala">
                             </div>
                         </div>
                     </div>
@@ -242,14 +243,14 @@
 
                         <!-- 1. Name of 2nd Applicant (UPDATED ORDER) -->
                         <div class="input-group">
-                            <label for="buyer2Name">Name of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <label for="buyer2Name">Name of Buyer (2nd Applicant)<span class="required-asterisk">*</span></label>
                             <input type="text" id="buyer2Name" name="buyer2Name" 
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Enter 2nd Applicant Name...">
                         </div>
 
                         <!-- 2. PAN of 2nd Applicant (UPDATED ORDER) -->
                         <div class="input-group">
-                            <label for="buyer2Pan">PAN of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <label for="buyer2Pan">PAN of Buyer (2nd Applicant)<span class="required-asterisk">*</span></label>
                             <input type="text" id="buyer2Pan" name="buyer2Pan" maxlength="10" 
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
                         </div>
@@ -270,7 +271,7 @@
                         <div class="input-group md:col-span-1">
                             <label for="buyer2Email">Email ID<span class="required-asterisk">*</span></label>
                             <input type="email" id="buyer2Email" name="buyer2Email"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., name@example.com">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="example@domain.com">
                         </div>
                         <div class="input-group md:col-span-1">
                             <label for="buyer2Mobile">Mobile Number<span class="required-asterisk">*</span></label>
@@ -291,7 +292,7 @@
                             <div class="input-group">
                                 <label for="buyer2Country">Country<span class="required-asterisk">*</span></label>
                                 <input type="text" id="buyer2Country" name="buyer2Country" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
                             </div>
                             <div class="input-group">
                                 <label for="buyer2Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
@@ -309,7 +310,7 @@
                             <div class="input-group">
                                 <label for="buyer2PinCode">PIN Code<span class="required-asterisk">*</span></label>
                                 <input type="text" id="buyer2PinCode" name="buyer2PinCode" maxlength="6" pattern="\d{6}" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
                             </div>
                         </div>
 
@@ -332,10 +333,11 @@
                                 <input type="text" id="buyer2District" name="buyer2District"
                                     class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                             </div>
+                            <!-- State Textbox (UPDATED) -->
                             <div class="input-group">
-                                <label for="buyer2State">State</label>
-                                <input type="text" id="buyer2State" name="buyer2State"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <label for="buyer2State">State<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer2State" name="buyer2State" 
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: Kerala">
                             </div>
                         </div>
                     </div>
@@ -348,6 +350,22 @@
             <div class="border border-gray-200 rounded-lg p-4">
                 <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">III. Details of Seller</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- 1. Name of Seller (UPDATED ORDER) -->
+                    <div class="input-group">
+                        <label for="sellerName">Name of Seller<span class="required-asterisk">*</span></label>
+                        <input type="text" id="sellerName" name="sellerName" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Seller Name here...">
+                    </div>
+                    
+                    <!-- 2. PAN of Seller (UPDATED ORDER) -->
+                    <div class="input-group">
+                        <label for="sellerPan">PAN of Seller<span class="required-asterisk">*</span></label>
+                        <input type="text" id="sellerPan" name="sellerPan" maxlength="10" required
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                    </div>
+                    
+                    <!-- 3. Residential Status (UPDATED ORDER) -->
                     <div class="input-group">
                         <label for="sellerStatus">Residential Status<span class="required-asterisk">*</span></label>
                         <select id="sellerStatus" name="sellerStatus" required
@@ -356,28 +374,18 @@
                             <option value="nri">Non-Resident Indian (NRI)</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <label for="sellerPan">PAN of Seller<span class="required-asterisk">*</span></label>
-                        <input type="text" id="sellerPan" name="sellerPan" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
-                    </div>
-                    <div class="input-group">
-                        <label for="sellerName">Name of Seller<span class="required-asterisk">*</span></label>
-                        <input type="text" id="sellerName" name="sellerName" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div class="input-group">
                         <label for="sellerEmail">Email ID<span class="required-asterisk">*</span></label>
                         <input type="email" id="sellerEmail" name="sellerEmail" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="example@domain.com">
                     </div>
                     <div class="input-group">
                         <label for="sellerMobile">Mobile Number<span class="required-asterisk">*</span></label>
                         <input type="tel" id="sellerMobile" name="sellerMobile" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 9895012345">
                     </div>
                 </div>
 
@@ -388,7 +396,7 @@
                         <div class="input-group">
                             <label for="sellerCountry">Country<span class="required-asterisk">*</span></label>
                             <input type="text" id="sellerCountry" name="sellerCountry" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
                         </div>
                         <div class="input-group">
                             <label for="sellerFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
@@ -406,7 +414,7 @@
                         <div class="input-group">
                             <label for="sellerPinCode">PIN Code<span class="required-asterisk">*</span></label>
                             <input type="text" id="sellerPinCode" name="sellerPinCode" maxlength="6" pattern="\d{6}" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
                         </div>
                     </div>
 
@@ -429,10 +437,49 @@
                             <input type="text" id="sellerDistrict" name="sellerDistrict"
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                        <!-- State dropdown (UPDATED) -->
                         <div class="input-group">
-                            <label for="sellerState">State</label>
-                            <input type="text" id="sellerState" name="sellerState"
+                            <label for="sellerState">State<span class="required-asterisk">*</span></label>
+                            <select id="sellerState" name="sellerState" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands (UT)</option>
+                                <option value="Chandigarh">Chandigarh (UT)</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu (UT)</option>
+                                <option value="Delhi">Delhi (NCT)</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir (UT)</option>
+                                <option value="Ladakh">Ladakh (UT)</option>
+                                <option value="Lakshadweep">Lakshadweep (UT)</option>
+                                <option value="Puducherry">Puducherry (UT)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -467,7 +514,7 @@
                         <div class="input-group">
                             <label for="propertyCountry">Country<span class="required-asterisk">*</span></label>
                             <input type="text" id="propertyCountry" name="propertyCountry" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
                         </div>
                         <div class="input-group">
                             <label for="propertyFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
@@ -485,7 +532,7 @@
                         <div class="input-group">
                             <label for="propertyPinCode">PIN Code<span class="required-asterisk">*</span></label>
                             <input type="text" id="propertyPinCode" name="propertyPinCode" maxlength="6" pattern="\d{6}" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="695002">
                         </div>
                     </div>
 
@@ -508,10 +555,49 @@
                             <input type="text" id="propertyDistrict" name="propertyDistrict"
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                        <!-- State dropdown (UPDATED) -->
                         <div class="input-group">
-                            <label for="propertyState">State</label>
-                            <input type="text" id="propertyState" name="propertyState"
+                            <label for="propertyState">State<span class="required-asterisk">*</span></label>
+                            <select id="propertyState" name="propertyState" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands (UT)</option>
+                                <option value="Chandigarh">Chandigarh (UT)</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu (UT)</option>
+                                <option value="Delhi">Delhi (NCT)</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir (UT)</option>
+                                <option value="Ladakh">Ladakh (UT)</option>
+                                <option value="Lakshadweep">Lakshadweep (UT)</option>
+                                <option value="Puducherry">Puducherry (UT)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -538,21 +624,22 @@
                 </div>
                 <!-------------------------------------------------------------------------->
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                    <div class="input-group">
+                <!-- FINAL UPDATED GRID LAYOUT FOR AMOUNTS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="input-group md:col-span-1">
                         <label for="amountPaid">Amount Paid/Credited Currently<span class="required-asterisk">*</span></label>
                         <input type="number" id="amountPaid" name="amountPaid" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Amount to deduct TDS on">
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Amount on which TDS to be deducted">
                     </div>
-                    <div class="input-group">
-                        <label for="tdsRate">TDS Rate (%)<span class="required-asterisk">*</span></label>
-                        <input type="number" id="tdsRate" name="tdsRate" value="1.00" step="0.01" min="0.01" required disabled
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed">
-                    </div>
-                    <div class="input-group">
+                    <div class="input-group md:col-span-1">
                         <label for="tdsAmount">TDS Amount Deducted (1% of Amount Paid)<span class="required-asterisk">*</span></label>
                         <input type="text" id="tdsAmount" name="tdsAmount" readonly
                             class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-gray-200 cursor-not-allowed font-bold text-green-700">
+                    </div>
+                    <!-- HIDDEN TDS RATE FIELD -->
+                    <div class="input-group hidden">
+                        <label for="tdsRate">TDS Rate (%)<span class="required-asterisk">*</span></label>
+                        <input type="number" id="tdsRate" name="tdsRate" value="1.00" step="0.01" min="0.01" required disabled>
                     </div>
                 </div>
 
@@ -615,6 +702,14 @@
         const buyer2FlatInput = document.getElementById('buyer2Flat');
         const buyer2PinCodeInput = document.getElementById('buyer2PinCode');
         const buyer2StatusInput = document.getElementById('buyer2Status');
+        const buyer2StateInput = document.getElementById('buyer2State'); // State input reference
+        
+        // References for Seller
+        const sellerStateInput = document.getElementById('sellerState');
+        
+        // References for Property
+        const propertyStateInput = document.getElementById('propertyState');
+
 
         // Helper function to set required status for all 2nd Applicant fields
         function setApplicant2Required(isRequired) {
@@ -627,6 +722,8 @@
             buyer2FlatInput.required = isRequired;
             buyer2PinCodeInput.required = isRequired;
             buyer2StatusInput.required = isRequired; // Setting required for status
+            // Note: buyer2StateInput is now a text input, so setting required here:
+            buyer2StateInput.required = isRequired; 
         }
         
         // Helper function to clear all 2nd Applicant fields
@@ -640,18 +737,20 @@
             buyer2FlatInput.value = '';
             buyer2PinCodeInput.value = '';
             buyer2StatusInput.value = 'resident'; // Resetting status to a default valid value
+            buyer2StateInput.value = ''; // Clear state input
             // Clear other address fields (optional but good practice)
             document.getElementById('buyer2Road').value = '';
             document.getElementById('buyer2PostOffice').value = '';
             document.getElementById('buyer2Locality').value = '';
             document.getElementById('buyer2District').value = '';
-            document.getElementById('buyer2State').value = '';
         }
 
         // Function to toggle the second buyer fields and rename the first buyer's fields
         function toggleSecondApplicant(value) {
             const panAsterisk = '<span class="required-asterisk">*</span>';
             const nameAsterisk = '<span class="required-asterisk">*</span>';
+            const buyer1NameInput = document.getElementById('buyer1Name');
+            const buyer2NameInput = document.getElementById('buyer2Name');
             
             if (value === 'Yes') {
                 // --- MULTIPLE BUYERS: YES ---
@@ -661,6 +760,9 @@
                 buyer1PanLabel.innerHTML = `${originalPanText} (1st Applicant)${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText} (1st Applicant)${nameAsterisk}`;
                 
+                // Set Placeholder for 1st Applicant
+                buyer1NameInput.placeholder = 'Enter 1st Applicant Name...';
+
                 // 2. Show 1st Applicant Ownership field and keep required
                 buyer1OwnershipRow.classList.remove('hidden');
                 buyer1OwnershipInput.required = true;
@@ -672,6 +774,10 @@
                 applicant2DetailsDiv.classList.remove('hidden');
                 setApplicant2Required(true);
 
+                // Set Placeholder for 2nd Applicant
+                buyer2NameInput.placeholder = 'Enter 2nd Applicant Name...';
+
+
             } else {
                 // --- MULTIPLE BUYERS: NO ---
                 
@@ -680,6 +786,9 @@
                 buyer1PanLabel.innerHTML = `${originalPanText}${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText}${nameAsterisk}`;
                 
+                // Restore Placeholder for single Buyer
+                buyer1NameInput.placeholder = 'Enter Buyer Name...';
+
                 // 2. HIDE 1st Applicant Ownership field, remove required, and clear value
                 buyer1OwnershipRow.classList.add('hidden');
                 buyer1OwnershipInput.required = false;
