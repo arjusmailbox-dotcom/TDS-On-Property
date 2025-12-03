@@ -59,12 +59,12 @@
                         <label class="block mb-2">Whether more than one Buyer as per Agreement<span class="required-asterisk">*</span></label>
                         <div class="flex space-x-6 mt-1">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="Yes" required onchange="toggleSecondBuyer(this.value)"
+                                <input type="radio" name="multipleBuyers" value="Yes" required onchange="toggleSecondApplicant(this.value)"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">Yes</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="No" required onchange="toggleSecondBuyer(this.value)"
+                                <input type="radio" name="multipleBuyers" value="No" required onchange="toggleSecondApplicant(this.value)"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">No</span>
                             </label>
@@ -124,96 +124,236 @@
             <!-- Section 2: Buyer (Deductor) Details -->
             <div class="border border-gray-200 rounded-lg p-4">
                 <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">II. Details of Buyer</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="input-group">
-                        <label for="buyerStatus">Residential Status<span class="required-asterisk">*</span></label>
-                        <select id="buyerStatus" name="buyerStatus" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="resident">Resident</option>
-                            <option value="nri">Non-Resident Indian (NRI)</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label id="buyer1PanLabel" for="buyerPan">PAN of Buyer<span class="required-asterisk">*</span></label>
-                        <input type="text" id="buyerPan" name="buyerPan" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
-                    </div>
-                    <div class="input-group">
-                        <label id="buyer1NameLabel" for="buyerName">Name of Buyer<span class="required-asterisk">*</span></label>
-                        <input type="text" id="buyerName" name="buyerName" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div class="input-group">
-                        <label for="buyerEmail">Email ID<span class="required-asterisk">*</span></label>
-                        <input type="email" id="buyerEmail" name="buyerEmail" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="input-group">
-                        <label for="buyerMobile">Mobile Number<span class="required-asterisk">*</span></label>
-                        <input type="tel" id="buyerMobile" name="buyerMobile" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
                 
-                <!-- START: Buyer Address Sub-Fields -->
-                <div class="space-y-4 mt-6">
-                    <h3 class="text-md font-semibold text-gray-700">Communication Address</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- START 1ST APPLICANT DETAILS BLOCK -->
+                <div id="applicant1Details">
+                    <!-- CHANGED TEXT COLOR TO INDIGO-700 -->
+                    <h3 id="applicant1Heading" class="text-lg font-semibold text-indigo-700 mb-3">Buyer Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- 1. Name of Buyer (UPDATED ORDER) -->
                         <div class="input-group">
-                            <label for="buyerCountry">Country<span class="required-asterisk">*</span></label>
-                            <input type="text" id="buyerCountry" name="buyerCountry" required
+                            <label id="buyer1NameLabel" for="buyer1Name">Name of Buyer<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer1Name" name="buyer1Name" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                        
+                        <!-- 2. PAN of Buyer (UPDATED ORDER) -->
                         <div class="input-group">
-                            <label for="buyerFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
-                            <input type="text" id="buyerFlat" name="buyerFlatDoorBuilding" required
+                            <label id="buyer1PanLabel" for="buyer1Pan">PAN of Buyer<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer1Pan" name="buyer1Pan" maxlength="10" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                        </div>
+
+                        <!-- 3. Residential Status (UPDATED ORDER) -->
+                        <div class="input-group">
+                            <label for="buyer1Status">Residential Status<span class="required-asterisk">*</span></label>
+                            <select id="buyer1Status" name="buyer1Status" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option value="resident">Resident</option>
+                                <option value="nri">Non-Resident Indian (NRI)</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Percentage of Ownership 1st Applicant -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="input-group md:col-span-1">
+                            <label for="buyer1Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
+                            <input type="number" id="buyer1Ownership" name="buyer1Ownership" min="1" max="100" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
+                        </div>
+                        <div class="md:col-span-2"></div>
+                    </div>
+                    <!-- END: Percentage of Ownership 1st Applicant -->
+
+                    <!-- 1ST APPLICANT CONTACT -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div class="input-group">
-                            <label for="buyerRoad">Road / Street / Block / Sector</label>
-                            <input type="text" id="buyerRoad" name="buyerRoadStreetBlockSector"
+                            <label for="buyer1Email">Email ID<span class="required-asterisk">*</span></label>
+                            <input type="email" id="buyer1Email" name="buyer1Email" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="input-group">
-                            <label for="buyerPinCode">PIN Code<span class="required-asterisk">*</span></label>
-                            <input type="text" id="buyerPinCode" name="buyerPinCode" maxlength="6" pattern="\d{6}" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                            <label for="buyer1Mobile">Mobile Number<span class="required-asterisk">*</span></label>
+                            <input type="tel" id="buyer1Mobile" name="buyer1Mobile" maxlength="10" required
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
                     </div>
+                    
+                    <!-- 1ST APPLICANT ADDRESS Sub-Fields -->
+                    <div class="space-y-4 mt-6">
+                        <h3 class="text-md font-semibold text-gray-700">Communication Address (Applicant 1)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer1Country">Country<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer1Country" name="buyer1Country" required
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer1Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer1Flat" name="buyer1FlatDoorBuilding" required
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="buyerPostOffice">Post Office</label>
-                            <input type="text" id="buyerPostOffice" name="buyerPostOffice"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer1Road">Road / Street / Block / Sector</label>
+                                <input type="text" id="buyer1Road" name="buyer1RoadStreetBlockSector"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer1PinCode">PIN Code<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer1PinCode" name="buyer1PinCode" maxlength="6" pattern="\d{6}" required
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="buyerLocality">Area/Locality</label>
-                            <input type="text" id="buyerLocality" name="buyerAreaLocality"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="buyerDistrict">District</label>
-                            <input type="text" id="buyerDistrict" name="buyerDistrict"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer1PostOffice">Post Office</label>
+                                <input type="text" id="buyer1PostOffice" name="buyer1PostOffice"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer1Locality">Area/Locality</label>
+                                <input type="text" id="buyer1Locality" name="buyer1AreaLocality"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="buyerState">State</label>
-                            <input type="text" id="buyerState" name="buyerState"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer1District">District</label>
+                                <input type="text" id="buyer1District" name="buyer1District"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer1State">State</label>
+                                <input type="text" id="buyer1State" name="buyer1State"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- END: Buyer Address Sub-Fields -->
+                <!-- END 1ST APPLICANT DETAILS BLOCK -->
+
+                
+                <!-- START 2ND APPLICANT DETAILS BLOCK (HIDDEN BY DEFAULT) -->
+                <div id="applicant2Details" class="hidden border-t border-gray-300 pt-6 mt-6">
+                    <!-- CHANGED TEXT COLOR TO TEAL-700 -->
+                    <h3 class="text-lg font-semibold text-teal-700 mb-3">2nd Applicant Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                        <!-- 1. Name of 2nd Applicant (UPDATED ORDER) -->
+                        <div class="input-group">
+                            <label for="buyer2Name">Name of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer2Name" name="buyer2Name" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+
+                        <!-- 2. PAN of 2nd Applicant (UPDATED ORDER) -->
+                        <div class="input-group">
+                            <label for="buyer2Pan">PAN of 2nd Applicant<span class="required-asterisk">*</span></label>
+                            <input type="text" id="buyer2Pan" name="buyer2Pan" maxlength="10" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
+                        </div>
+
+                        <!-- 3. Residential Status (Default to Resident, but configurable) -->
+                        <div class="input-group">
+                            <label for="buyer2Status">Residential Status<span class="required-asterisk">*</span></label>
+                            <select id="buyer2Status" name="buyer2Status"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option value="resident">Resident</option>
+                                <option value="nri">Non-Resident Indian (NRI)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Percentage of Ownership 2nd Applicant -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="input-group md:col-span-1">
+                            <label for="buyer2Ownership">Percentage of Ownership in %<span class="required-asterisk">*</span></label>
+                            <input type="number" id="buyer2Ownership" name="buyer2Ownership" min="1" max="100" 
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 50">
+                        </div>
+                        <div class="md:col-span-2"></div>
+                    </div>
+                    <!-- END: Percentage of Ownership 2nd Applicant -->
+
+                    <!-- 2ND APPLICANT CONTACT -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="input-group">
+                            <label for="buyer2Email">Email ID<span class="required-asterisk">*</span></label>
+                            <input type="email" id="buyer2Email" name="buyer2Email"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="input-group">
+                            <label for="buyer2Mobile">Mobile Number<span class="required-asterisk">*</span></label>
+                            <input type="tel" id="buyer2Mobile" name="buyer2Mobile" maxlength="10"
+                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- 2ND APPLICANT ADDRESS Sub-Fields -->
+                    <div class="space-y-4 mt-6">
+                        <h3 class="text-md font-semibold text-gray-700">Communication Address (Applicant 2)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer2Country">Country<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer2Country" name="buyer2Country" 
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer2Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer2Flat" name="buyer2FlatDoorBuilding" 
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer2Road">Road / Street / Block / Sector</label>
+                                <input type="text" id="buyer2Road" name="buyer2RoadStreetBlockSector"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer2PinCode">PIN Code<span class="required-asterisk">*</span></label>
+                                <input type="text" id="buyer2PinCode" name="buyer2PinCode" maxlength="6" pattern="\d{6}" 
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="6-digit code">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer2PostOffice">Post Office</label>
+                                <input type="text" id="buyer2PostOffice" name="buyer2PostOffice"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer2Locality">Area/Locality</label>
+                                <input type="text" id="buyer2Locality" name="buyer2AreaLocality"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label for="buyer2District">District</label>
+                                <input type="text" id="buyer2District" name="buyer2District"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="input-group">
+                                <label for="buyer2State">State</label>
+                                <input type="text" id="buyer2State" name="buyer2State"
+                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END 2ND APPLICANT DETAILS BLOCK -->
+
             </div>
 
             <!-- Section 3: Seller (Deductee) Details -->
@@ -459,43 +599,100 @@
     </div>
 
     <script>
-        const secondBuyerPanInput = document.getElementById('buyer2Pan');
-        const secondBuyerNameInput = document.getElementById('buyer2Name');
-        const secondBuyerFieldsDiv = document.getElementById('secondBuyerFields');
-
-        // Get references to the 1st Applicant labels
+        // References for 1st Applicant
+        const applicant1Heading = document.getElementById('applicant1Heading');
         const buyer1PanLabel = document.getElementById('buyer1PanLabel');
         const buyer1NameLabel = document.getElementById('buyer1NameLabel');
+        const buyer1OwnershipInput = document.getElementById('buyer1Ownership');
+        const buyer1StatusInput = document.getElementById('buyer1Status');
+        const buyer1EmailInput = document.getElementById('buyer1Email');
+        const buyer1MobileInput = document.getElementById('buyer1Mobile');
+        const buyer1CountryInput = document.getElementById('buyer1Country');
+        const buyer1FlatInput = document.getElementById('buyer1Flat');
+        const buyer1PinCodeInput = document.getElementById('buyer1PinCode');
+        
         const originalPanText = 'PAN of Buyer';
         const originalNameText = 'Name of Buyer';
 
+        // References for 2nd Applicant
+        const applicant2DetailsDiv = document.getElementById('applicant2Details');
+        const buyer2PanInput = document.getElementById('buyer2Pan');
+        const buyer2NameInput = document.getElementById('buyer2Name');
+        const buyer2OwnershipInput = document.getElementById('buyer2Ownership');
+        const buyer2EmailInput = document.getElementById('buyer2Email');
+        const buyer2MobileInput = document.getElementById('buyer2Mobile');
+        const buyer2CountryInput = document.getElementById('buyer2Country');
+        const buyer2FlatInput = document.getElementById('buyer2Flat');
+        const buyer2PinCodeInput = document.getElementById('buyer2PinCode');
+        const buyer2StatusInput = document.getElementById('buyer2Status');
+
+        // Helper function to set required status for all 2nd Applicant fields
+        function setApplicant2Required(isRequired) {
+            buyer2PanInput.required = isRequired;
+            buyer2NameInput.required = isRequired;
+            buyer2OwnershipInput.required = isRequired; 
+            buyer2EmailInput.required = isRequired;
+            buyer2MobileInput.required = isRequired;
+            buyer2CountryInput.required = isRequired;
+            buyer2FlatInput.required = isRequired;
+            buyer2PinCodeInput.required = isRequired;
+            buyer2StatusInput.required = isRequired; // Setting required for status
+        }
+        
+        // Helper function to clear all 2nd Applicant fields
+        function clearApplicant2Fields() {
+            buyer2PanInput.value = '';
+            buyer2NameInput.value = '';
+            buyer2OwnershipInput.value = ''; 
+            buyer2EmailInput.value = '';
+            buyer2MobileInput.value = '';
+            buyer2CountryInput.value = '';
+            buyer2FlatInput.value = '';
+            buyer2PinCodeInput.value = '';
+            buyer2StatusInput.value = 'resident'; // Resetting status to a default valid value
+            // Clear other address fields (optional but good practice)
+            document.getElementById('buyer2Road').value = '';
+            document.getElementById('buyer2PostOffice').value = '';
+            document.getElementById('buyer2Locality').value = '';
+            document.getElementById('buyer2District').value = '';
+            document.getElementById('buyer2State').value = '';
+        }
+
         // Function to toggle the second buyer fields and rename the first buyer's fields
-        function toggleSecondBuyer(value) {
+        function toggleSecondApplicant(value) {
             const panAsterisk = '<span class="required-asterisk">*</span>';
             const nameAsterisk = '<span class="required-asterisk">*</span>';
+            
+            // Applicant 1 fields (Ownership) are always required
+            buyer1OwnershipInput.required = true;
 
             if (value === 'Yes') {
-                // RENAME 1ST APPLICANT FIELDS
+                // RENAME 1ST APPLICANT FIELDS AND SHOW HEADING
+                applicant1Heading.textContent = '1st Applicant Details';
+                // Set color class explicitly if needed, although it's set in HTML now
+                // applicant1Heading.classList.add('text-indigo-700'); 
                 buyer1PanLabel.innerHTML = `${originalPanText} (1st Applicant)${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText} (1st Applicant)${nameAsterisk}`;
+                
+                // SHOW 2ND APPLICANT FIELDS
+                applicant2DetailsDiv.classList.remove('hidden');
+                
+                // Set required status for 2nd Applicant fields
+                setApplicant2Required(true);
 
-                // Show 2ND APPLICANT FIELDS and make them required
-                secondBuyerFieldsDiv.classList.remove('hidden');
-                secondBuyerPanInput.required = true;
-                secondBuyerNameInput.required = true;
             } else {
                 // RESTORE ORIGINAL FIELD NAMES
+                applicant1Heading.textContent = 'Buyer Details';
+                // applicant1Heading.classList.remove('text-indigo-700'); 
                 buyer1PanLabel.innerHTML = `${originalPanText}${panAsterisk}`;
                 buyer1NameLabel.innerHTML = `${originalNameText}${nameAsterisk}`;
 
-                // Hide 2ND APPLICANT FIELDS and remove required attribute
-                secondBuyerFieldsDiv.classList.add('hidden');
-                secondBuyerPanInput.required = false;
-                secondBuyerNameInput.required = false;
+                // HIDE 2ND APPLICANT FIELDS
+                applicant2DetailsDiv.classList.add('hidden');
                 
-                // Clear values when hidden (important for data submission)
-                secondBuyerPanInput.value = '';
-                secondBuyerNameInput.value = '';
+                // Remove required status and clear values for 2nd Applicant
+                setApplicant2Required(false);
+                clearApplicant2Fields();
             }
         }
 
@@ -506,7 +703,6 @@
             const tdsRate = 0.01; // 1%
             
             // --- Formspree Configuration ---
-            // Linking to the user-provided hash, configured to send to arjusmailbox@gmail.com
             const FORMSPREE_URL = 'https://formspree.io/f/xyzrjoea'; 
             const TARGET_EMAIL = 'arjusmailbox@gmail.com';
             // -------------------------------
@@ -514,17 +710,16 @@
             // Ensure initial state is correctly set (hidden)
             const initialBuyerStatus = document.querySelector('input[name="multipleBuyers"]:checked');
             if (initialBuyerStatus) {
-                toggleSecondBuyer(initialBuyerStatus.value);
+                toggleSecondApplicant(initialBuyerStatus.value);
             } else {
                 // Default to 'No' state if no radio button is checked initially
-                toggleSecondBuyer('No');
+                toggleSecondApplicant('No');
             }
 
 
             // Function to calculate TDS automatically
             const calculateTDS = () => {
                 const amountPaid = parseFloat(amountPaidInput.value) || 0;
-                // TDS is 1% of the amount paid/credited
                 const tdsCalculated = amountPaid * tdsRate;
                 tdsAmountInput.value = tdsCalculated.toFixed(2);
             };
@@ -539,7 +734,6 @@
 
             // Enhanced validation for PAN format
             const validatePan = (pan) => {
-                // Basic PAN validation: 5 letters, 4 numbers, 1 letter
                 const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
                 return panRegex.test(pan.toUpperCase());
             }
@@ -548,17 +742,17 @@
                 event.preventDefault();
 
                 // 1. Client-Side Validation
-                const buyerPan = document.getElementById('buyerPan').value;
+                const buyer1Pan = document.getElementById('buyer1Pan').value;
                 const sellerPan = document.getElementById('sellerPan').value;
                 const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
 
-                if (!validatePan(buyerPan)) {
-                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Buyer (1st Applicant).");
+                if (!validatePan(buyer1Pan)) {
+                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the 1st Applicant.");
                     return;
                 }
                 
                 if (multipleBuyersSelected === 'Yes') {
-                    if (!validatePan(secondBuyerPanInput.value)) {
+                    if (!validatePan(buyer2PanInput.value)) {
                         showModal("Validation Error", "Please enter a valid 10-digit PAN for the 2nd Applicant.");
                         return;
                     }
@@ -582,7 +776,7 @@
                 }
                 
                 // Add calculated fields for clarity in the email body
-                data._subject = `New Form 26QB Data Submission from ${data.buyerName}`;
+                data._subject = `New Form 26QB Data Submission from ${data.buyer1Name}`;
                 data.tdsAmount = tdsAmountInput.value;
                 data.tdsRate = tdsRate.toFixed(2);
                 data.RecipientEmail = TARGET_EMAIL; 
@@ -606,7 +800,7 @@
                         showModal("Data Submitted", successContent);
                         form.reset(); 
                         // Ensure that after reset, the fields revert to the standard "No" state.
-                        toggleSecondBuyer('No'); 
+                        toggleSecondApplicant('No'); 
 
                     } else {
                         const errorData = await response.json();
