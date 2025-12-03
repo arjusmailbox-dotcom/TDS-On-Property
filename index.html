@@ -134,12 +134,12 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="buyerPan">PAN of Buyer<span class="required-asterisk">*</span></label>
+                        <label id="buyer1PanLabel" for="buyerPan">PAN of Buyer<span class="required-asterisk">*</span></label>
                         <input type="text" id="buyerPan" name="buyerPan" maxlength="10" required
                             class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
                     </div>
                     <div class="input-group">
-                        <label for="buyerName">Name of Buyer<span class="required-asterisk">*</span></label>
+                        <label id="buyer1NameLabel" for="buyerName">Name of Buyer<span class="required-asterisk">*</span></label>
                         <input type="text" id="buyerName" name="buyerName" required
                             class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                     </div>
@@ -463,15 +463,32 @@
         const secondBuyerNameInput = document.getElementById('buyer2Name');
         const secondBuyerFieldsDiv = document.getElementById('secondBuyerFields');
 
-        // Function to toggle the second buyer fields based on radio button value
+        // Get references to the 1st Applicant labels
+        const buyer1PanLabel = document.getElementById('buyer1PanLabel');
+        const buyer1NameLabel = document.getElementById('buyer1NameLabel');
+        const originalPanText = 'PAN of Buyer';
+        const originalNameText = 'Name of Buyer';
+
+        // Function to toggle the second buyer fields and rename the first buyer's fields
         function toggleSecondBuyer(value) {
+            const panAsterisk = '<span class="required-asterisk">*</span>';
+            const nameAsterisk = '<span class="required-asterisk">*</span>';
+
             if (value === 'Yes') {
-                // Show fields and make them required
+                // RENAME 1ST APPLICANT FIELDS
+                buyer1PanLabel.innerHTML = `${originalPanText} (1st Applicant)${panAsterisk}`;
+                buyer1NameLabel.innerHTML = `${originalNameText} (1st Applicant)${nameAsterisk}`;
+
+                // Show 2ND APPLICANT FIELDS and make them required
                 secondBuyerFieldsDiv.classList.remove('hidden');
                 secondBuyerPanInput.required = true;
                 secondBuyerNameInput.required = true;
             } else {
-                // Hide fields and remove required attribute
+                // RESTORE ORIGINAL FIELD NAMES
+                buyer1PanLabel.innerHTML = `${originalPanText}${panAsterisk}`;
+                buyer1NameLabel.innerHTML = `${originalNameText}${nameAsterisk}`;
+
+                // Hide 2ND APPLICANT FIELDS and remove required attribute
                 secondBuyerFieldsDiv.classList.add('hidden');
                 secondBuyerPanInput.required = false;
                 secondBuyerNameInput.required = false;
@@ -499,8 +516,8 @@
             if (initialBuyerStatus) {
                 toggleSecondBuyer(initialBuyerStatus.value);
             } else {
-                // Default to hidden if no radio button is checked initially
-                secondBuyerFieldsDiv.classList.add('hidden');
+                // Default to 'No' state if no radio button is checked initially
+                toggleSecondBuyer('No');
             }
 
 
@@ -536,7 +553,7 @@
                 const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
 
                 if (!validatePan(buyerPan)) {
-                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Buyer (e.g., ABCDE1234F).");
+                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Buyer (1st Applicant).");
                     return;
                 }
                 
@@ -548,7 +565,7 @@
                 }
                 
                 if (!validatePan(sellerPan)) {
-                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Seller (e.g., ABCDE1234F).");
+                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Seller.");
                     return;
                 }
                 
@@ -588,6 +605,9 @@
                         `;
                         showModal("Data Submitted", successContent);
                         form.reset(); 
+                        // Ensure that after reset, the fields revert to the standard "No" state.
+                        toggleSecondBuyer('No'); 
+
                     } else {
                         const errorData = await response.json();
                         let errorMsg = errorData.error ? `Formspree Error: ${errorData.error}` : 'Unknown submission error.';
