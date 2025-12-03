@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form 26QB Data Collector</title>
+    <title>Form 26QB Data Collector (Internal Use Only)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -237,8 +237,8 @@
                 
                 <!-- START 2ND APPLICANT DETAILS BLOCK (HIDDEN BY DEFAULT) -->
                 <div id="applicant2Details" class="hidden border-t border-gray-300 pt-6 mt-6">
-                    <!-- CHANGED TEXT COLOR TO TEAL-700 -->
-                    <h3 class="text-lg font-semibold text-teal-700 mb-3">2nd Applicant Details</h3>
+                    <!-- CHANGED TEXT COLOR TO RED-700 -->
+                    <h3 class="text-lg font-semibold text-red-700 mb-3">2nd Applicant Details</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                         <!-- 1. Name of 2nd Applicant (UPDATED ORDER) -->
@@ -621,6 +621,7 @@
                     <label for="previousInstallments">Total amount paid/ credited in previous installments, if any</label>
                     <input type="number" id="previousInstallments" name="previousInstallmentsTotal" value="0" min="0"
                         class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <span id="previousInstallmentsExGST" class="text-xs text-gray-500 mt-1 block"></span>
                 </div>
                 <!-------------------------------------------------------------------------->
 
@@ -630,6 +631,7 @@
                         <label for="amountPaid">Amount Paid/Credited Currently<span class="required-asterisk">*</span></label>
                         <input type="number" id="amountPaid" name="amountPaid" required
                             class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Amount on which TDS to be deducted">
+                        <span id="amountPaidExGST" class="text-xs text-gray-500 mt-1 block"></span>
                     </div>
                     <div class="input-group md:col-span-1">
                         <label for="tdsAmount">TDS Amount Deducted (1% of Amount Paid)<span class="required-asterisk">*</span></label>
@@ -688,8 +690,18 @@
         const buyer1FlatInput = document.getElementById('buyer1Flat');
         const buyer1PinCodeInput = document.getElementById('buyer1PinCode');
         
+        const previousInstallmentsInput = document.getElementById('previousInstallments');
+        const previousInstallmentsExGSTSpan = document.getElementById('previousInstallmentsExGST');
+        
+        const amountPaidInput = document.getElementById('amountPaid');
+        const amountPaidExGSTSpan = document.getElementById('amountPaidExGST');
+        
+        const tdsAmountInput = document.getElementById('tdsAmount');
+
+        
         const originalPanText = 'PAN of Buyer';
         const originalNameText = 'Name of Buyer';
+        const GST_FACTOR = 1.05; // UPDATED: 100% + 5% GST (1.05)
 
         // References for 2nd Applicant
         const applicant2DetailsDiv = document.getElementById('applicant2Details');
@@ -721,9 +733,8 @@
             buyer2CountryInput.required = isRequired;
             buyer2FlatInput.required = isRequired;
             buyer2PinCodeInput.required = isRequired;
-            buyer2StatusInput.required = isRequired; // Setting required for status
-            // Note: buyer2StateInput is now a text input, so setting required here:
-            buyer2StateInput.required = isRequired; 
+            buyer2StatusInput.required = isRequired; 
+            buyer2StateInput.required = isRequired;
         }
         
         // Helper function to clear all 2nd Applicant fields
@@ -736,9 +747,8 @@
             buyer2CountryInput.value = '';
             buyer2FlatInput.value = '';
             buyer2PinCodeInput.value = '';
-            buyer2StatusInput.value = 'resident'; // Resetting status to a default valid value
-            buyer2StateInput.value = ''; // Clear state input
-            // Clear other address fields (optional but good practice)
+            buyer2StatusInput.value = 'resident'; 
+            buyer2StateInput.value = ''; 
             document.getElementById('buyer2Road').value = '';
             document.getElementById('buyer2PostOffice').value = '';
             document.getElementById('buyer2Locality').value = '';
@@ -804,10 +814,32 @@
             }
         }
 
+        // Function to calculate TDS automatically (UPDATED LOGIC)
+        const calculateTDS = () => {
+            const tdsRate = 0.01;
+            const amountPaidWithGST = parseFloat(amountPaidInput.value) || 0;
+            
+            // 1. Calculate Amount Excluding GST: Amount / 1.05
+            const amountExcludingGST = amountPaidWithGST / GST_FACTOR;
+            
+            // 2. Calculate TDS: Amount Excluding GST * 1%
+            const tdsCalculated = amountExcludingGST * tdsRate;
+
+            tdsAmountInput.value = tdsCalculated.toFixed(2);
+        };
+        
+        function calculateExGST(inputElement, outputElement) {
+            const value = parseFloat(inputElement.value) || 0;
+            if (value > 0) {
+                const exGstAmount = value / GST_FACTOR;
+                outputElement.textContent = `(Amount excluding GST (5%): ₹ ${exGstAmount.toFixed(2)})`;
+            } else {
+                outputElement.textContent = '';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('form26qb');
-            const amountPaidInput = document.getElementById('amountPaid');
-            const tdsAmountInput = document.getElementById('tdsAmount');
             const tdsRate = 0.01; // 1%
             
             // --- Formspree Configuration ---
@@ -815,24 +847,33 @@
             const TARGET_EMAIL = 'arjusmailbox@gmail.com';
             // -------------------------------
 
-            // Ensure initial state is correctly set (hidden)
+            // Initial state toggle
             const initialBuyerStatus = document.querySelector('input[name="multipleBuyers"]:checked');
             if (initialBuyerStatus) {
                 toggleSecondApplicant(initialBuyerStatus.value);
             } else {
-                // Default to 'No' state if no radio button is checked initially
                 toggleSecondApplicant('No');
             }
 
+            // --- Event Listeners for Dynamic Calculations ---
+            
+            // Listener for Amount Paid/Credited Currently (requires both GST and TDS calculation)
+            amountPaidInput.addEventListener('input', () => {
+                calculateTDS();
+                calculateExGST(amountPaidInput, amountPaidExGSTSpan);
+            });
+            
+            // Listener for Previous Installments (only requires GST calculation)
+            previousInstallmentsInput.addEventListener('input', () => {
+                calculateExGST(previousInstallmentsInput, previousInstallmentsExGSTSpan);
+            });
+            
+            // Initial calculation check in case of browser autofill
+            calculateTDS();
+            calculateExGST(amountPaidInput, amountPaidExGSTSpan);
+            calculateExGST(previousInstallmentsInput, previousInstallmentsExGSTSpan);
+            // ------------------------------------------------
 
-            // Function to calculate TDS automatically
-            const calculateTDS = () => {
-                const amountPaid = parseFloat(amountPaidInput.value) || 0;
-                const tdsCalculated = amountPaid * tdsRate;
-                tdsAmountInput.value = tdsCalculated.toFixed(2);
-            };
-
-            amountPaidInput.addEventListener('input', calculateTDS);
 
             const showModal = (title, contentHTML) => {
                 document.getElementById('modalTitle').textContent = title;
@@ -888,6 +929,10 @@
                 data.tdsAmount = tdsAmountInput.value;
                 data.tdsRate = tdsRate.toFixed(2);
                 data.RecipientEmail = TARGET_EMAIL; 
+                // Add calculated GST fields to submission data
+                data.previousInstallmentsExGST = previousInstallmentsExGSTSpan.textContent;
+                data.amountPaidExGST = amountPaidExGSTSpan.textContent;
+
 
                 // 3. ACTUAL Data Submission via Formspree
                 
@@ -907,8 +952,10 @@
                         `;
                         showModal("Data Submitted", successContent);
                         form.reset(); 
-                        // Ensure that after reset, the fields revert to the standard "No" state.
                         toggleSecondApplicant('No'); 
+                        // Clear GST fields on reset
+                        previousInstallmentsExGSTSpan.textContent = '';
+                        amountPaidExGSTSpan.textContent = '';
 
                     } else {
                         const errorData = await response.json();
@@ -923,9 +970,6 @@
             };
 
             form.addEventListener('submit', handleSubmit);
-            
-            // Initial call to ensure TDS field is populated on load if necessary (e.g., if a browser autofills)
-            calculateTDS();
         });
     </script>
 </body>
