@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE ahtml>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,6 +35,12 @@
         }
         .submit-btn:hover {
             background-color: #0d47a1;
+        }
+        /* Style for hardcoded display fields */
+        .hardcoded-field {
+            background-color: #e5e7eb; /* Gray-200 for read-only look */
+            cursor: not-allowed;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -175,62 +181,8 @@
                         </div>
                     </div>
                     
-                    <!-- 1ST APPLICANT ADDRESS Sub-Fields -->
-                    <div class="space-y-4 mt-6">
-                        <h3 id="buyer1AddressHeading" class="text-md font-semibold text-gray-700">Communication Address of the Buyer</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer1Country">Country<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer1Country" name="buyer1Country" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer1Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer1Flat" name="buyer1FlatDoorBuilding" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer1Road">Road / Street / Block / Sector</label>
-                                <input type="text" id="buyer1Road" name="buyer1RoadStreetBlockSector"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer1PinCode">PIN Code<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer1PinCode" name="buyer1PinCode" maxlength="6" pattern="\d{6}" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer1PostOffice">Post Office</label>
-                                <input type="text" id="buyer1PostOffice" name="buyer1PostOffice"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer1Locality">Area/Locality</label>
-                                <input type="text" id="buyer1Locality" name="buyer1AreaLocality"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer1District">District</label>
-                                <input type="text" id="buyer1District" name="buyer1District"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <!-- State Textbox (UPDATED) -->
-                            <div class="input-group">
-                                <label for="buyer1State">State<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer1State" name="buyer1State" required
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: Kerala">
-                            </div>
-                        </div>
-                    </div>
+                    <!-- REMOVED: 1ST APPLICANT ADDRESS Sub-Fields -->
+                    
                 </div>
                 <!-- END 1ST APPLICANT DETAILS BLOCK -->
 
@@ -285,221 +237,42 @@
                         </div>
                     </div>
 
-                    <!-- 2ND APPLICANT ADDRESS Sub-Fields -->
-                    <div class="space-y-4 mt-6">
-                        <h3 class="text-md font-semibold text-gray-700">Communication Address (Applicant 2)</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer2Country">Country<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer2Country" name="buyer2Country" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer2Flat">Flat / Door / Building<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer2Flat" name="buyer2FlatDoorBuilding" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer2Road">Road / Street / Block / Sector</label>
-                                <input type="text" id="buyer2Road" name="buyer2RoadStreetBlockSector"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer2PinCode">PIN Code<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer2PinCode" name="buyer2PinCode" maxlength="6" pattern="\d{6}" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer2PostOffice">Post Office</label>
-                                <input type="text" id="buyer2PostOffice" name="buyer2PostOffice"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div class="input-group">
-                                <label for="buyer2Locality">Area/Locality</label>
-                                <input type="text" id="buyer2Locality" name="buyer2AreaLocality"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="input-group">
-                                <label for="buyer2District">District</label>
-                                <input type="text" id="buyer2District" name="buyer2District"
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <!-- State Textbox (UPDATED) -->
-                            <div class="input-group">
-                                <label for="buyer2State">State<span class="required-asterisk">*</span></label>
-                                <input type="text" id="buyer2State" name="buyer2State" 
-                                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: Kerala">
-                            </div>
-                        </div>
-                    </div>
+                    <!-- REMOVED: 2ND APPLICANT ADDRESS Sub-Fields -->
                 </div>
                 <!-- END 2ND APPLICANT DETAILS BLOCK -->
 
             </div>
 
-            <!-- Section 3: Seller (Deductee) Details -->
-            <div class="border border-gray-200 rounded-lg p-4">
-                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">III. Details of Seller</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    
-                    <!-- 1. Name of Seller (UPDATED ORDER) -->
-                    <div class="input-group">
-                        <label for="sellerName">Name of Seller<span class="required-asterisk">*</span></label>
-                        <input type="text" id="sellerName" name="sellerName" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Seller Name here...">
-                    </div>
-                    
-                    <!-- 2. PAN of Seller (UPDATED ORDER) -->
-                    <div class="input-group">
-                        <label for="sellerPan">PAN of Seller<span class="required-asterisk">*</span></label>
-                        <input type="text" id="sellerPan" name="sellerPan" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md uppercase focus:ring-blue-500 focus:border-blue-500" placeholder="ABCDE1234F">
-                    </div>
-                    
-                    <!-- 3. Residential Status (UPDATED ORDER) -->
-                    <div class="input-group">
-                        <label for="sellerStatus">Residential Status<span class="required-asterisk">*</span></label>
-                        <select id="sellerStatus" name="sellerStatus" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="resident">Resident</option>
-                            <option value="nri">Non-Resident Indian (NRI)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div class="input-group">
-                        <label for="sellerEmail">Email ID<span class="required-asterisk">*</span></label>
-                        <input type="email" id="sellerEmail" name="sellerEmail" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="example@domain.com">
-                    </div>
-                    <div class="input-group">
-                        <label for="sellerMobile">Mobile Number<span class="required-asterisk">*</span></label>
-                        <input type="tel" id="sellerMobile" name="sellerMobile" maxlength="10" required
-                            class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 9895012345">
-                    </div>
-                </div>
-
-                <!-- START: Seller Address Sub-Fields -->
-                <div class="space-y-4 mt-6">
-                    <h3 class="text-md font-semibold text-gray-700">Communication Address</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="sellerCountry">Country<span class="required-asterisk">*</span></label>
-                            <input type="text" id="sellerCountry" name="sellerCountry" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
-                        </div>
-                        <div class="input-group">
-                            <label for="sellerFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
-                            <input type="text" id="sellerFlat" name="sellerFlatDoorBuilding" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="sellerRoad">Road / Street / Block / Sector</label>
-                            <input type="text" id="sellerRoad" name="sellerRoadStreetBlockSector"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="sellerPinCode">PIN Code<span class="required-asterisk">*</span></label>
-                            <input type="text" id="sellerPinCode" name="sellerPinCode" maxlength="6" pattern="\d{6}" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 695002">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="sellerPostOffice">Post Office</label>
-                            <input type="text" id="sellerPostOffice" name="sellerPostOffice"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="sellerLocality">Area/Locality</label>
-                            <input type="text" id="sellerLocality" name="sellerAreaLocality"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="sellerDistrict">District</label>
-                            <input type="text" id="sellerDistrict" name="sellerDistrict"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <!-- State dropdown (UPDATED) -->
-                        <div class="input-group">
-                            <label for="sellerState">State<span class="required-asterisk">*</span></label>
-                            <select id="sellerState" name="sellerState" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Select State</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands (UT)</option>
-                                <option value="Chandigarh">Chandigarh (UT)</option>
-                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu (UT)</option>
-                                <option value="Delhi">Delhi (NCT)</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir (UT)</option>
-                                <option value="Ladakh">Ladakh (UT)</option>
-                                <option value="Lakshadweep">Lakshadweep (UT)</option>
-                                <option value="Puducherry">Puducherry (UT)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Seller Address Sub-Fields -->
-            </div>
-
-            <!-- Section 4: Property Transfer Details -->
+            <!-- REMOVED ENTIRE Section 3: Seller (Deductee) Details -->
+            
+            <!-- Section 4: Property Transfer Details (Now Section 3 logically, but keeping IV in text for data field clarity) -->
             <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">IV. Property Details</h2>
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">III. Property Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- 1. Type of Property (MODIFIED to fixed value) -->
                     <div class="input-group">
                         <label for="propertyType">Type of Property<span class="required-asterisk">*</span></label>
-                        <select id="propertyType" name="propertyType" required
+                        <!-- Hidden input to submit the fixed value -->
+                        <input type="hidden" id="propertyType" name="propertyType" value="building">
+                        <!-- Display label for the fixed value -->
+                        <div class="w-full mt-1 p-2 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hardcoded-field">
+                            Building (Apartments, Flats, Shops, etc.)
+                        </div>
+                    </div>
+
+                    <!-- 2. Project Name (NEW FIELD) -->
+                    <div class="input-group">
+                        <label for="projectName">Project Name<span class="required-asterisk">*</span></label>
+                        <select id="projectName" name="projectName" required
                             class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Select Type</option>
-                            <option value="land">Land</option>
-                            <option value="building">Building</option>
-                            <option value="both">Land and Building</option>
+                            <option value="">Select Project</option>
+                            <option value="Sobha Meadows Whispering Hills">Sobha Meadows Whispering Hills</option>
+                            <option value="Sobha Ridge Whispering Hills">Sobha Ridge Whispering Hills</option>
                         </select>
                     </div>
+                    
+                    <!-- 3. Total Value of Consideration -->
                     <div class="input-group">
                         <label for="saleConsideration">Total Value of Consideration (Property Value) in ₹<span class="required-asterisk">*</span></label>
                         <input type="number" id="saleConsideration" name="saleConsideration" min="5000000" required
@@ -509,97 +282,23 @@
 
                 <!-- START: Property Address Sub-Fields -->
                 <div class="space-y-4 mt-6">
-                    <h3 class="text-md font-semibold text-gray-700">Property Address</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Flat / Door / Building renamed to Apartment Number (Input remains active) -->
                         <div class="input-group">
-                            <label for="propertyCountry">Country<span class="required-asterisk">*</span></label>
-                            <input type="text" id="propertyCountry" name="propertyCountry" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Example: India">
-                        </div>
-                        <div class="input-group">
-                            <label for="propertyFlat">Flat / Door / Building<span class="required-asterisk">*</span></label>
+                            <label for="propertyFlat">Apartment Number<span class="required-asterisk">*</span></label>
                             <input type="text" id="propertyFlat" name="propertyFlatDoorBuilding" required
                                 class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                         </div>
                     </div>
+                    
+                    <!-- Hidden inputs for hardcoded address data -->
+                    <input type="hidden" name="propertyCountry" value="India">
+                    <input type="hidden" name="propertyPinCode" value="695017">
+                    <input type="hidden" name="propertyPostOffice" value="Sreekaryam">
+                    <input type="hidden" name="propertyAreaLocality" value="Thiruvananthapuram">
+                    <input type="hidden" name="propertyDistrict" value="Thiruvananthapuram">
+                    <input type="hidden" name="propertyState" value="Kerala">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="propertyRoad">Road / Street / Block / Sector</label>
-                            <input type="text" id="propertyRoad" name="propertyRoadStreetBlockSector"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="propertyPinCode">PIN Code<span class="required-asterisk">*</span></label>
-                            <input type="text" id="propertyPinCode" name="propertyPinCode" maxlength="6" pattern="\d{6}" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="695002">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="propertyPostOffice">Post Office</label>
-                            <input type="text" id="propertyPostOffice" name="propertyPostOffice"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="propertyLocality">Area/Locality</label>
-                            <input type="text" id="propertyLocality" name="propertyAreaLocality"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="input-group">
-                            <label for="propertyDistrict">District</label>
-                            <input type="text" id="propertyDistrict" name="propertyDistrict"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <!-- State dropdown (UPDATED) -->
-                        <div class="input-group">
-                            <label for="propertyState">State<span class="required-asterisk">*</span></label>
-                            <select id="propertyState" name="propertyState" required
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Select State</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands (UT)</option>
-                                <option value="Chandigarh">Chandigarh (UT)</option>
-                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu (UT)</option>
-                                <option value="Delhi">Delhi (NCT)</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir (UT)</option>
-                                <option value="Ladakh">Ladakh (UT)</option>
-                                <option value="Lakshadweep">Lakshadweep (UT)</option>
-                                <option value="Puducherry">Puducherry (UT)</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <!-- END: Property Address Sub-Fields -->
 
@@ -678,7 +377,7 @@
     <script>
         // References for 1st Applicant
         const applicant1Heading = document.getElementById('applicant1Heading');
-        const buyer1AddressHeading = document.getElementById('buyer1AddressHeading'); // New Ref
+        // REMOVED: const buyer1AddressHeading = document.getElementById('buyer1AddressHeading'); 
         const buyer1PanLabel = document.getElementById('buyer1PanLabel');
         const buyer1NameLabel = document.getElementById('buyer1NameLabel');
         const buyer1OwnershipInput = document.getElementById('buyer1Ownership');
@@ -686,9 +385,9 @@
         const buyer1StatusInput = document.getElementById('buyer1Status');
         const buyer1EmailInput = document.getElementById('buyer1Email');
         const buyer1MobileInput = document.getElementById('buyer1Mobile');
-        const buyer1CountryInput = document.getElementById('buyer1Country');
-        const buyer1FlatInput = document.getElementById('buyer1Flat');
-        const buyer1PinCodeInput = document.getElementById('buyer1PinCode');
+        // REMOVED: const buyer1CountryInput = document.getElementById('buyer1Country');
+        // REMOVED: const buyer1FlatInput = document.getElementById('buyer1Flat');
+        // REMOVED: const buyer1PinCodeInput = document.getElementById('buyer1PinCode');
         
         const previousInstallmentsInput = document.getElementById('previousInstallments');
         const previousInstallmentsExGSTSpan = document.getElementById('previousInstallmentsExGST');
@@ -710,14 +409,14 @@
         const buyer2OwnershipInput = document.getElementById('buyer2Ownership');
         const buyer2EmailInput = document.getElementById('buyer2Email');
         const buyer2MobileInput = document.getElementById('buyer2Mobile');
-        const buyer2CountryInput = document.getElementById('buyer2Country');
-        const buyer2FlatInput = document.getElementById('buyer2Flat');
-        const buyer2PinCodeInput = document.getElementById('buyer2PinCode');
+        // REMOVED: const buyer2CountryInput = document.getElementById('buyer2Country');
+        // REMOVED: const buyer2FlatInput = document.getElementById('buyer2Flat');
+        // REMOVED: const buyer2PinCodeInput = document.getElementById('buyer2PinCode');
         const buyer2StatusInput = document.getElementById('buyer2Status');
         const buyer2StateInput = document.getElementById('buyer2State'); // State input reference
         
         // References for Seller
-        const sellerStateInput = document.getElementById('sellerState');
+        // NOTE: Seller fields are now hardcoded in HTML and don't need direct JS references for submission
         
         // References for Property
         const propertyStateInput = document.getElementById('propertyState');
@@ -730,11 +429,12 @@
             buyer2OwnershipInput.required = isRequired; 
             buyer2EmailInput.required = isRequired;
             buyer2MobileInput.required = isRequired;
-            buyer2CountryInput.required = isRequired;
-            buyer2FlatInput.required = isRequired;
-            buyer2PinCodeInput.required = isRequired;
+            // REMOVED ADDRESS FIELDS:
+            // buyer2CountryInput.required = isRequired;
+            // buyer2FlatInput.required = isRequired;
+            // buyer2PinCodeInput.required = isRequired;
             buyer2StatusInput.required = isRequired; 
-            buyer2StateInput.required = isRequired;
+            // buyer2StateInput.required = isRequired;
         }
         
         // Helper function to clear all 2nd Applicant fields
@@ -744,15 +444,16 @@
             buyer2OwnershipInput.value = ''; 
             buyer2EmailInput.value = '';
             buyer2MobileInput.value = '';
-            buyer2CountryInput.value = '';
-            buyer2FlatInput.value = '';
-            buyer2PinCodeInput.value = '';
+            // REMOVED ADDRESS FIELDS:
+            // buyer2CountryInput.value = '';
+            // buyer2FlatInput.value = '';
+            // buyer2PinCodeInput.value = '';
             buyer2StatusInput.value = 'resident'; 
-            buyer2StateInput.value = ''; 
-            document.getElementById('buyer2Road').value = '';
-            document.getElementById('buyer2PostOffice').value = '';
-            document.getElementById('buyer2Locality').value = '';
-            document.getElementById('buyer2District').value = '';
+            // buyer2StateInput.value = ''; 
+            // document.getElementById('buyer2Road').value = '';
+            // document.getElementById('buyer2PostOffice').value = '';
+            // document.getElementById('buyer2Locality').value = '';
+            // document.getElementById('buyer2District').value = '';
         }
 
         // Function to toggle the second buyer fields and rename the first buyer's fields
@@ -777,8 +478,8 @@
                 buyer1OwnershipRow.classList.remove('hidden');
                 buyer1OwnershipInput.required = true;
                 
-                // 3. Rename 1st Applicant Address Heading
-                buyer1AddressHeading.textContent = 'Communication Address (Applicant 1)';
+                // 3. Rename 1st Applicant Address Heading (removed, but keeping related logic)
+                // buyer1AddressHeading.textContent = 'Communication Address (Applicant 1)';
 
                 // 4. Show 2nd Applicant fields and set required
                 applicant2DetailsDiv.classList.remove('hidden');
@@ -804,8 +505,8 @@
                 buyer1OwnershipInput.required = false;
                 buyer1OwnershipInput.value = '';
                 
-                // 3. Restore 1st Applicant Address Heading
-                buyer1AddressHeading.textContent = 'Communication Address of the Buyer';
+                // 3. Restore 1st Applicant Address Heading (removed, but keeping related logic)
+                // buyer1AddressHeading.textContent = 'Communication Address of the Buyer';
 
                 // 4. Hide 2nd Applicant fields and clear values
                 applicant2DetailsDiv.classList.add('hidden');
@@ -892,7 +593,8 @@
 
                 // 1. Client-Side Validation
                 const buyer1Pan = document.getElementById('buyer1Pan').value;
-                const sellerPan = document.getElementById('sellerPan').value;
+                // Since sellerPan is hardcoded, we retrieve it from the hidden input
+                // const sellerPan = document.getElementById('sellerPan').value; // REMOVED since Seller section is removed
                 const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
 
                 if (!validatePan(buyer1Pan)) {
@@ -907,11 +609,6 @@
                     }
                 }
                 
-                if (!validatePan(sellerPan)) {
-                    showModal("Validation Error", "Please enter a valid 10-digit PAN for the Seller.");
-                    return;
-                }
-                
                 // 2. Data Collection
                 const formData = new FormData(form);
                 const data = {};
@@ -924,6 +621,23 @@
                     }
                 }
                 
+                // Manually inject hardcoded Seller data since Section III was removed
+                // This data will not be present in formData by default as the fields were hidden or removed.
+                // Re-adding the required Seller details for form submission compatibility (assuming they are still needed by the backend/Formspree)
+                data.sellerName = "Sobha Limited";
+                data.sellerPan = "AABCS7723E";
+                data.sellerStatus = "resident";
+                data.sellerEmail = "radhakrishnan.m@sobha.com";
+                data.sellerMobile = "9880034900";
+                data.sellerCountry = "India";
+                data.sellerFlatDoorBuilding = "55/1, Devarabisanahalli";
+                data.sellerPinCode = "560103";
+                data.sellerPostOffice = "Bellandur";
+                data.sellerAreaLocality = "Devara Beesana Halli";
+                data.sellerDistrict = "Bangalore";
+                data.sellerState = "Karnataka";
+
+
                 // Add calculated fields for clarity in the email body
                 data._subject = `New Form 26QB Data Submission from ${data.buyer1Name}`;
                 data.tdsAmount = tdsAmountInput.value;
