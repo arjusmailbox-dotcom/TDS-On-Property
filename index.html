@@ -65,12 +65,12 @@
                         <label class="block mb-2">Whether more than one Buyer as per Agreement<span class="required-asterisk">*</span></label>
                         <div class="flex space-x-6 mt-1">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="Yes" required onchange="toggleSecondApplicant(this.value)"
+                                <input type="radio" name="multipleBuyers" value="Yes" required onchange="toggleSecondApplicant(this.value); updateTDSFilingDetails();"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">Yes</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="multipleBuyers" value="No" required onchange="toggleSecondApplicant(this.value)"
+                                <input type="radio" name="multipleBuyers" value="No" required onchange="toggleSecondApplicant(this.value); updateTDSFilingDetails();"
                                     class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                 <span class="ml-2 text-gray-700">No</span>
                             </label>
@@ -335,8 +335,33 @@
                         <input type="number" id="tdsRate" name="tdsRate" value="1.00" step="0.01" min="0.01" required disabled>
                     </div>
                 </div>
-
             </div>
+            
+            <!-- NEW SECTION IV: TDS Filing Details -->
+            <div class="border border-gray-200 rounded-lg p-4">
+                <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">IV. TDS Returns Filing Charges (For Information)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- No of TDS Returns (Dynamic) -->
+                    <div class="input-group">
+                        <label for="numTDS">No. of TDS Returns<span class="required-asterisk">*</span></label>
+                        <input type="hidden" id="numTDS" name="numTDS" value="1">
+                        <div id="numTDSDisplay" class="w-full mt-1 p-2 border border-gray-300 rounded-md hardcoded-field text-gray-700 font-bold">
+                            1
+                        </div>
+                    </div>
+                    
+                    <!-- Filing Fees (Dynamic) -->
+                    <div class="input-group">
+                        <label for="filingFees">Filing Fees<span class="required-asterisk">*</span></label>
+                        <input type="hidden" id="filingFees" name="filingFees" value="1000">
+                        <div id="filingFeesDisplay" class="w-full mt-1 p-2 border border-gray-300 rounded-md hardcoded-field text-gray-700 font-bold">
+                            ₹ 1,000
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END NEW SECTION IV -->
 
             <!-- Declaration -->
             <div class="flex items-start mt-8">
@@ -388,6 +413,12 @@
         const amountPaidExGSTSpan = document.getElementById('amountPaidExGST');
         
         const tdsAmountInput = document.getElementById('tdsAmount');
+
+        // NEW TDS Filing Refs
+        const numTDSInput = document.getElementById('numTDS');
+        const numTDSDisplay = document.getElementById('numTDSDisplay');
+        const filingFeesInput = document.getElementById('filingFees');
+        const filingFeesDisplay = document.getElementById('filingFeesDisplay');
 
         
         const originalPanText = 'PAN of Buyer';
@@ -447,6 +478,31 @@
             // document.getElementById('buyer2Locality').value = '';
             // document.getElementById('buyer2District').value = '';
         }
+
+        // Function to calculate and update TDS Filing Details
+        function updateTDSFilingDetails() {
+            const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
+            
+            let numReturns;
+            let filingFees;
+            
+            if (multipleBuyersSelected === 'Yes') {
+                numReturns = 2;
+                filingFees = 2000;
+            } else {
+                numReturns = 1;
+                filingFees = 1000;
+            }
+            
+            // Update hidden input values (for form submission)
+            numTDSInput.value = numReturns;
+            filingFeesInput.value = filingFees;
+            
+            // Update displayed values
+            numTDSDisplay.textContent = numReturns;
+            filingFeesDisplay.textContent = `₹ ${filingFees.toLocaleString('en-IN')}`;
+        }
+
 
         // Function to toggle the second buyer fields and rename the first buyer's fields
         function toggleSecondApplicant(value) {
@@ -540,13 +596,14 @@
             const TARGET_EMAIL = 'arjusmailbox@gmail.com';
             // -------------------------------
 
-            // Initial state toggle
+            // Initial state toggle and filing details update
             const initialBuyerStatus = document.querySelector('input[name="multipleBuyers"]:checked');
             if (initialBuyerStatus) {
                 toggleSecondApplicant(initialBuyerStatus.value);
             } else {
                 toggleSecondApplicant('No');
             }
+            updateTDSFilingDetails(); // Initial call for the new section
 
             // --- Event Listeners for Dynamic Calculations ---
             
@@ -561,6 +618,15 @@
                 calculateExGST(previousInstallmentsInput, previousInstallmentsExGSTSpan);
             });
             
+            // Event listener for multipleBuyers radio buttons (already modified in HTML, adding here for completeness)
+            document.querySelectorAll('input[name="multipleBuyers"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    toggleSecondApplicant(radio.value);
+                    updateTDSFilingDetails();
+                });
+            });
+
+
             // Initial calculation check in case of browser autofill
             calculateTDS();
             calculateExGST(amountPaidInput, amountPaidExGSTSpan);
@@ -585,8 +651,6 @@
 
                 // 1. Client-Side Validation
                 const buyer1Pan = document.getElementById('buyer1Pan').value;
-                // Since sellerPan is hardcoded, we retrieve it from the hidden input
-                // const sellerPan = document.getElementById('sellerPan').value; // REMOVED since Seller section is removed
                 const multipleBuyersSelected = document.querySelector('input[name="multipleBuyers"]:checked')?.value;
 
                 if (!validatePan(buyer1Pan)) {
@@ -613,9 +677,7 @@
                     }
                 }
                 
-                // Manually inject hardcoded Seller data since Section III was removed
-                // This data will not be present in formData by default as the fields were hidden or removed.
-                // Re-adding the required Seller details for form submission compatibility (assuming they are still needed by the backend/Formspree)
+                // Manually inject hardcoded Seller data (since Section III was removed)
                 data.sellerName = "Sobha Limited";
                 data.sellerPan = "AABCS7723E";
                 data.sellerStatus = "resident";
@@ -629,7 +691,6 @@
                 data.sellerDistrict = "Bangalore";
                 data.sellerState = "Karnataka";
 
-
                 // Add calculated fields for clarity in the email body
                 data._subject = `New Form 26QB Data Submission from ${data.buyer1Name}`;
                 data.tdsAmount = tdsAmountInput.value;
@@ -638,6 +699,10 @@
                 // Add calculated GST fields to submission data
                 data.previousInstallmentsExGST = previousInstallmentsExGSTSpan.textContent;
                 data.amountPaidExGST = amountPaidExGSTSpan.textContent;
+                
+                // Add new TDS Filing details
+                data.numTDS = numTDSInput.value;
+                data.filingFees = filingFeesInput.value;
 
 
                 // 3. ACTUAL Data Submission via Formspree
@@ -659,6 +724,7 @@
                         showModal("Data Submitted", successContent);
                         form.reset(); 
                         toggleSecondApplicant('No'); 
+                        updateTDSFilingDetails(); // Reset filing details display
                         // Clear GST fields on reset
                         previousInstallmentsExGSTSpan.textContent = '';
                         amountPaidExGSTSpan.textContent = '';
@@ -667,7 +733,7 @@
                         const errorData = await response.json();
                         let errorMsg = errorData.error ? `Formspree Error: ${errorData.error}` : 'Unknown submission error.';
                         console.error('Formspree Error Response:', errorData);
-                        showModal("Submission Error", `<p>Failed to submit data. Please check the following:</p><ul class="list-disc list-inside mt-2"><li>Is the Formspree hash correctly linked to <code>${TARGET_EMAIL}</code>?</li><li>${errorMsg}</li></ul><p class="mt-2">Please try again later.</p>`);
+                        showModal("Submission Error", `<p>Failed to submit data. Please check the following:</p><ul class=\"list-disc list-inside mt-2\"><li>Is the Formspree hash correctly linked to <code>${TARGET_EMAIL}</code>?</li><li>${errorMsg}</li></ul><p class="mt-2">Please try again later.</p>`);
                     }
                 } catch (error) {
                     console.error('Network Error:', error);
