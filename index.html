@@ -108,20 +108,14 @@
                         </div>
                     </div>
                     
-                    <!-- 4. Payment Type (Now Radio Buttons) -->
+                    <!-- 4. Payment Type (MODIFIED to hardcoded text) -->
                     <div class="input-group">
                         <label class="block mb-2">Payment Type<span class="required-asterisk">*</span></label>
-                        <div class="flex space-x-6 mt-1">
-                            <label class="inline-flex items-center">
-                                <input type="radio" name="transactionType" value="lumpSum" required
-                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                <span class="ml-2 text-gray-700">Lump Sum</span>
-                            </label>
-                            <label class="inline-flex items-center">
-                                <input type="radio" name="transactionType" value="installment" required
-                                    class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                <span class="ml-2 text-gray-700">Installment</span>
-                            </label>
+                        <!-- Hidden input to submit the fixed value -->
+                        <input type="hidden" name="transactionType" value="installment">
+                        <!-- Display label for the fixed value -->
+                        <div class="w-full mt-1 p-2 border border-gray-300 rounded-md hardcoded-field text-gray-700">
+                            Instalment
                         </div>
                     </div>
                 </div>
@@ -243,8 +237,6 @@
 
             </div>
 
-            <!-- REMOVED ENTIRE Section 3: Seller (Deductee) Details -->
-            
             <!-- Section 4: Property Transfer Details (Now Section 3 logically, but keeping IV in text for data field clarity) -->
             <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
                 <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">III. Property Details</h2>
